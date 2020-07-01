@@ -1,0 +1,201 @@
+<html><head><title>Ar3's osu! Hitsound Tool html5 version</title>
+<meta charset="gbk" />
+<link rel="stylesheet" type="text/css" href="ar3.css" />
+<link rel="stylesheet" type="text/css" href="wcx.css" />
+<script src="ar3.js" type="text/javascript"></script>
+<script src="filereader.js" type="text/javascript"></script>
+<script src="load_map.js" type="text/javascript"></script>
+<script src="newcombo.js" type="text/javascript"></script>
+<script src="breakmap.js" type="text/javascript"></script>
+<script src="tp1.js" type="text/javascript"></script>
+</head><body id="hst5" style="font-family:verdana;">
+	<div id="load_map">Load Map: <input type="file" value="" id="load_map_file" onchange="load_map();return false" /></div>
+	<div id="mapstat_area">
+		<table>
+			<tr>
+				<td class="x_1">Artist:</td>
+				<td><input type="text" value="" class="smaller_text" id="mapstat_artist" /></td>
+				<td colspan="2"><input type="text" value="" class="smaller_text" id="mapstat_artist2" /></td>
+			</tr>
+			<tr>
+				<td class="x_1">Title:</td>
+				<td><input type="text" value="" class="smaller_text" id="mapstat_title" /></td>
+				<td colspan="2"><input type="text" value="" class="smaller_text" id="mapstat_title2" /></td>
+			</tr>
+			<tr>
+				<td class="x_1">Mapper:</td>
+				<td><input type="text" value="" class="smaller_text" id="mapstat_mapper" /></td>
+				<td class="x_1">Source:</td>
+				<td><input type="text" value="" class="smaller_text" id="mapstat_source" /></td>
+			</tr>
+			<tr>
+				<td class="x_1">Diff:</td>
+				<td><input type="text" value="" class="smaller_text" id="mapstat_diff" /></td>
+				<td class="x_1">Tags:</td>
+				<td><input type="text" value="" class="smaller_text" id="mapstat_tags" /></td>
+			</tr>
+		</table>
+	</div>
+	<div id="additional_area">
+		<table>
+			<tr>
+				<td class="x_1">Time:&nbsp;</td>
+				<td><input type="text" value="0" class="smaller_text" id="additional_timestart" style="width:68px;" /></td>
+				<td class="x_1">&nbsp; - &nbsp;</td>
+				<td><input type="text" value="19911123" class="smaller_text" id="additional_timeend" style="width:68px;" /></td>
+			</tr>
+			<tr>
+				<td class="x_1"><a href="#" onclick="calcDiff();return false">calcDiff();</a></td>
+			</tr>
+		</table>
+	</div>
+	<div id="buff_area">
+		<a href="#" id="buff_s1" onclick="wwww(1);return false">24 clap</a><br />
+		<a href="#" id="buff_s2" onclick="wwww(2);return false">13 clap</a><br />
+		<a href="#" id="buff_s3" onclick="wwww(3);return false">red line clap</a><br />
+		<a href="#" id="buff_s10" onclick="wwww(10);return false">metronome finish</a><br />
+		<a href="#" id="buff_s4" onclick="wwww(4);return false">23 clap [3/4]</a><br />
+		<a href="#" id="buff_s5" onclick="wwww(5);return false">24 whistle</a><br />
+		<a href="#" id="buff_s6" onclick="wwww(6);return false">[ O W O C ]</a><br />
+		<a href="#" id="buff_s7" onclick="wwww(7);return false">[ O C O W ]</a><br />
+		<a href="#" id="buff_s12" onclick="wwww(12);return false">[ O C OCC ]</a><br />
+		<a href="#" id="buff_s13" onclick="wwww(13);return false">1 clap</a><br />
+		<!-- a href="#" id="buff_s14" onclick="wwww(14);return false">2 clap</a><br / -->
+		<a href="#" id="buff_s15" onclick="wwww(15);return false">3 clap</a><br />
+		<a href="#" id="buff_s8" onclick="wwww(8);return false">Remove all</a><br />
+		<!-- a href="#" id="buff_s16" onclick="wwww(16);return false">4 clap</a><br / -->
+		<br />
+		<a href="#" id="buff_s9" onclick="wwww(9);return false">taiko reverse</a><br />
+		<a href="#" id="buff_s11" onclick="wwww(11);return false">random d/k</a><br />
+		<br />
+		<a href="#" id="buff_s17" onclick="csp_open();return false">Custom Pattern</a><br />
+		<a href="#" id="buff_s18" onclick="csl_save();return false">Save Hitsounds</a><br />
+		<a href="#" id="buff_s19" onclick="csl_load();return false">Load Hitsounds</a><br />
+		<br />
+		<a href="#" id="buff_s20" onclick="nc_open();return false">new combos</a><br />
+		<a href="#" id="buff_s21" onclick="br_open();return false">break map</a><br />
+		<br />
+		<a href="#" id="buff_s0" onclick="epicfail();return false">Fail</a><br />
+	</div>
+	<div id="save_map" class="divbutton" onclick="javascript:sv();return false">Save Map</div>
+	<textarea id="output_data"></textarea>
+	<div id="reload_map" class="divbutton" onclick="javascript:load_map();return false">reload</div>
+<div id="float_custompattern" class="floating">
+	<a id="float_custompattern_linkx" class="changelink" style="" onclick="csp_close();return false">x</a>
+	<div class="x_3">- Custom Hitsound Pattern -</div>
+	<span class="x_2">Snap Divisor: 1/<input type="text" value="2" class="smaller_text" id="float_custompattern_divisor" onkeyup="csp_createCheckboxArray();" />
+	</span>
+	<span class="x_2"><span style="color:#86FF75">|</span> Repeat Ticks: <input type="text" value="8" class="smaller_text" id="float_custompattern_rticks" onkeyup="csp_createCheckboxArray();" />
+	</span><br />
+	<span class="x_2">Pattern: </span><input type="text" value="" class="smaller_text" id="float_custompattern_pattern" />
+	<div id="float_custompattern_tablediv">
+		<table id="float_custompattern_table">
+			<tr id="float_custompattern_tree">
+				<td class="float_custompattern_check"></td>
+				<td class="float_custompattern_lines" style="color:#D8D8D8;">|</td>
+				<td class="float_custompattern_lines" style="color:#FF5353;">|</td>
+				<td class="float_custompattern_lines" style="color:#D8D8D8;">|</td>
+				<td class="float_custompattern_lines" style="color:#FFF433;">|</td>
+				<td class="float_custompattern_lines" style="color:#D8D8D8;">|</td>
+				<td class="float_custompattern_lines" style="color:#FF5353;">|</td>
+				<td class="float_custompattern_lines" style="color:#D8D8D8;">|</td>
+				<td class="float_custompattern_lines" style="color:#FF5353;">|</td>
+			</tr>
+			<tr id="float_custompattern_tr1">
+				<td class="float_custompattern_down">Whistle</td>
+				<td class="float_custompattern_check"><input type="checkbox" class="float_custompattern_checkbox" /></td>
+				<td class="float_custompattern_check"><input type="checkbox" class="float_custompattern_checkbox" /></td>
+				<td class="float_custompattern_check"><input type="checkbox" class="float_custompattern_checkbox" /></td>
+				<td class="float_custompattern_check"><input type="checkbox" class="float_custompattern_checkbox" /></td>
+				<td class="float_custompattern_check"><input type="checkbox" class="float_custompattern_checkbox" /></td>
+				<td class="float_custompattern_check"><input type="checkbox" class="float_custompattern_checkbox" /></td>
+				<td class="float_custompattern_check"><input type="checkbox" class="float_custompattern_checkbox" /></td>
+				<td class="float_custompattern_check"><input type="checkbox" class="float_custompattern_checkbox" /></td>
+			</tr>
+			<tr id="float_custompattern_tr2">
+				<td class="float_custompattern_down">Finish</td>
+				<td class="float_custompattern_check"><input type="checkbox" class="float_custompattern_checkbox" /></td>
+				<td class="float_custompattern_check"><input type="checkbox" class="float_custompattern_checkbox" /></td>
+				<td class="float_custompattern_check"><input type="checkbox" class="float_custompattern_checkbox" /></td>
+				<td class="float_custompattern_check"><input type="checkbox" class="float_custompattern_checkbox" /></td>
+				<td class="float_custompattern_check"><input type="checkbox" class="float_custompattern_checkbox" /></td>
+				<td class="float_custompattern_check"><input type="checkbox" class="float_custompattern_checkbox" /></td>
+				<td class="float_custompattern_check"><input type="checkbox" class="float_custompattern_checkbox" /></td>
+				<td class="float_custompattern_check"><input type="checkbox" class="float_custompattern_checkbox" /></td>
+			</tr>
+			<tr id="float_custompattern_tr3">
+				<td class="float_custompattern_down">Clap</td>
+				<td class="float_custompattern_check"><input type="checkbox" class="float_custompattern_checkbox" /></td>
+				<td class="float_custompattern_check"><input type="checkbox" class="float_custompattern_checkbox" /></td>
+				<td class="float_custompattern_check"><input type="checkbox" class="float_custompattern_checkbox" /></td>
+				<td class="float_custompattern_check"><input type="checkbox" class="float_custompattern_checkbox" /></td>
+				<td class="float_custompattern_check"><input type="checkbox" class="float_custompattern_checkbox" /></td>
+				<td class="float_custompattern_check"><input type="checkbox" class="float_custompattern_checkbox" /></td>
+				<td class="float_custompattern_check"><input type="checkbox" class="float_custompattern_checkbox" /></td>
+				<td class="float_custompattern_check"><input type="checkbox" class="float_custompattern_checkbox" /></td>
+			</tr>
+			<tr id="float_custompattern_tr4">
+				<td class="float_custompattern_down">Sample</td>
+				<td class="float_custompattern_check"><input type="text" class="float_custompattern_text" value="0" maxlength="1" /></td>
+				<td class="float_custompattern_check"><input type="text" class="float_custompattern_text" value="0" maxlength="1" /></td>
+				<td class="float_custompattern_check"><input type="text" class="float_custompattern_text" value="0" maxlength="1" /></td>
+				<td class="float_custompattern_check"><input type="text" class="float_custompattern_text" value="0" maxlength="1" /></td>
+				<td class="float_custompattern_check"><input type="text" class="float_custompattern_text" value="0" maxlength="1" /></td>
+				<td class="float_custompattern_check"><input type="text" class="float_custompattern_text" value="0" maxlength="1" /></td>
+				<td class="float_custompattern_check"><input type="text" class="float_custompattern_text" value="0" maxlength="1" /></td>
+				<td class="float_custompattern_check"><input type="text" class="float_custompattern_text" value="0" maxlength="1" /></td>
+			</tr>
+			<tr id="float_custompattern_tr5">
+				<td class="float_custompattern_down">Add</td>
+				<td class="float_custompattern_check"><input type="text" class="float_custompattern_text" value="0" maxlength="1" /></td>
+				<td class="float_custompattern_check"><input type="text" class="float_custompattern_text" value="0" maxlength="1" /></td>
+				<td class="float_custompattern_check"><input type="text" class="float_custompattern_text" value="0" maxlength="1" /></td>
+				<td class="float_custompattern_check"><input type="text" class="float_custompattern_text" value="0" maxlength="1" /></td>
+				<td class="float_custompattern_check"><input type="text" class="float_custompattern_text" value="0" maxlength="1" /></td>
+				<td class="float_custompattern_check"><input type="text" class="float_custompattern_text" value="0" maxlength="1" /></td>
+				<td class="float_custompattern_check"><input type="text" class="float_custompattern_text" value="0" maxlength="1" /></td>
+				<td class="float_custompattern_check"><input type="text" class="float_custompattern_text" value="0" maxlength="1" /></td>
+			</tr>
+		</table>
+		<div id="float_custompattern_goleft" onmouseover="javascript:csp_goRight();" onmouseout="javascript:csp_moveEnd();"></div>
+		<div id="float_custompattern_goright" onmouseover="javascript:csp_goLeft();" onmouseout="javascript:csp_moveEnd();"></div>
+	</div>
+	<a id="float_custompattern_doit" href="#" onclick="csp();return false">[ Do it! ]</a>
+</div>
+<div id="float_newcombo" class="floating">
+	<div class="x_3">- New Combos -</div>
+	<a id="float_newcombo_linkx" class="changelink" style="" onclick="nc_close();return false">x</a>
+	<!-- a id="float_newcombo_1" class="newcombo_a" href="#" onclick="debugCombo();return false">Debug</a -->
+	<a id="float_newcombo_2" class="newcombo_a" href="#" onclick="setComboDivisor();return false">Divisor</a><br />
+	<a id="float_newcombo_3" class="newcombo_a" href="#" onclick="setComboDMT();return false">DMT</a><br />
+	<a id="float_newcombo_4" class="newcombo_a" href="#" onclick="setComboWL(2);return false">2 whitelines</a><br />
+	<a id="float_newcombo_5" class="newcombo_a" href="#" onclick="setComboWL(4);return false">4 whitelines</a><br />
+	<a id="float_newcombo_6" class="newcombo_a" href="#" onclick="setComboWL(8);return false">8 whitelines</a><br />
+	<a id="float_newcombo_7" class="newcombo_a" href="#" onclick="setComboBlackTech();return false">Black Technology</a><br />
+	<a id="float_newcombo_8" class="newcombo_a" href="#" onclick="setComboCycle();return false">Cycle</a> <input type="text" id="newcombo_cycletext" value="0,1,2" /><br />
+	<a id="float_newcombo_9" class="newcombo_a" href="#" onclick="setComboHitsounds();return false">Hitsounds</a><br />
+	<a id="float_newcombo_10" class="newcombo_a" href="#" onclick="setComboArea();return false">Area</a>
+	<a id="float_newcombo_doit" href="#" onclick="nc_do();return false">[ Do it! ]</a>
+</div>
+<div id="float_breakmap" class="floating">
+	<div class="x_3">- Break Map -</div>
+	<a id="float_breakmap_linkx" class="changelink" style="" onclick="br_close();return false">x</a>
+	<a id="float_breakmap_1" class="newcombo_a" href="#" onclick="breakmap1();return false">#1</a>
+	<a id="float_breakmap_3" class="newcombo_a" href="#" onclick="breakmap3();return false">#3</a>
+	<a id="float_breakmap_4" class="newcombo_a" href="#" onclick="breakmap4();return false">#4</a>
+	<a id="float_breakmap_5" class="newcombo_a" href="#" onclick="breakmap5();return false">#5</a><br />
+	<a id="float_breakmap_ST" class="newcombo_a" href="#" onclick="sliderTransformTest();return false">ST</a><br />
+	<a id="float_breakmap_2" class="newcombo_a" href="#" onclick="breakmap2();return false">Plot</a>
+	<input type="text" id="float_breakmap_2_1" value="x = Math.cos(t);" /><input type="text" id="float_breakmap_2_2" value="y = Math.sin(t);"/><br />
+	<a id="float_breakmap_MM" class="newcombo_a" href="#" onclick="maimai();return false">maimai</a><br />
+	<a id="float_breakmap_LL" class="newcombo_a" href="#" onclick="lovelive();return false">ll</a><br />
+	<a id="float_breakmap_TP" class="newcombo_a" href="#" onclick="testTP();return false">tp</a>
+	<a id="float_breakmap_doit" href="#" onclick="br_do();return false">[ Do it! ]</a>
+</div>
+<div id="float_msie" class="floating">
+	it seems your browser doesn't support html5 well, please use <a href="DLver.rar">dl ver</a>
+</div>
+<script>
+</script>
+<a href="" id="dl_link" style="display:none;">dl</a>
+</body></html>
