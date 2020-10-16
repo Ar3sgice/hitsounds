@@ -2,10 +2,10 @@
 
 osu! hitsound pattern tool
 
+# link
+
+https://ar3sgice.github.io/hitsounds/
+
 ## how to use this tool
 
-goodbye mapping
-
-goodbye programming
-
-sayonara
+i think it's pretty obvious
